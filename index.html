@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+  <!-- i18next & jquery -->
+  <script src="https://unpkg.com/i18next/dist/umd/i18next.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <style>
+    h1 {
+      font-family: 'Do Hyeon', sans-serif;
+    }
+  </style>
+
+  <title>성격검사 모음</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center my-5">
+      <h1 id="title">성격검사 연구소</h1>
+      <button class="btn btn-outline-secondary" id="language-switch">Switch to English</button>
+    </div>
+
+    <div class="row">
+      <!-- Card 1 -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="https://8personality.netlify.app/img/main.png" class="card-img-top" alt="MBTI 이미지">
+          <div class="card-body">
+            <h5 class="card-title" id="mbti-title">나의 팔각형 다이어그램</h5>
+            <p class="card-text" id="mbti-desc">사람의 성격 유형을 8가지 요소에 따라 분석해줍니다. 8각 다이어그램으로 성격유형을 한 눈에 볼 수 있습니다. 친구와 비교하기 기능도 제공됩니다</p>
+            <a href="https://8personality.netlify.app/" class="btn btn-primary">검사하기</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="https://artistrytest.netlify.app/img/main.png" class="card-img-top" alt="엔니어그램 이미지">
+          <div class="card-body">
+            <h5 class="card-title" id="enneagram-title">예술성 검사</h5>
+            <p class="card-text" id="enneagram-desc">예술성을 세가지 요소로 상세분석 해줍니다.</p>
+            <a href="https://artistrytest.netlify.app" class="btn btn-primary">검사하기</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="https://www.16personalities.com/static/animations/team.svg" class="card-img-top" alt="빅파이브 이미지">
+          <div class="card-body">
+            <h5 class="card-title" id="bigfive-title">MBTI</h5>
+            <p class="card-text" id="bigfive-desc">MBTI는 사람의 성격 유형을 16가지로 분류하는 성격 검사입니다.</p>
+            <a href="https://www.16personalities.com/" class="btn btn-primary">검사하기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var lang = "ko";
+
+    var translations = {
+      ko: {
+        title: "성격검사 연구소",
+        mbtiTitle: "나의 팔각형 다이어그램",
+        mbtiDesc: "사람의 성격 유형을 8가지 요소에 따라 분석해줍니다. 8각 다이어그램으로 성격유형을 한 눈에 볼 수 있습니다. 친구와 비교하기 기능도 제공됩니다",
+        enneagramTitle: "예술성 검사",
+        enneagramDesc: "예술성을 세가지 요소로 상세분석 해줍니다.",
+        bigfiveTitle: "MBTI",
+        bigfiveDesc: "MBTI는 사람의 성격 유형을 16가지로 분류하는 성격 검사입니다."
+      },
+      en: {
+        title: "Personality Research Lab",
+        mbtiTitle: "My Octagon Diagram",
+        mbtiDesc: "Analyzes personality types based on 8 factors. You can see your personality type at a glance with the octagon diagram. It also provides a feature to compare with friends.",
+        enneagramTitle: "Artistic Aptitude Test",
+        enneagramDesc: "Analyzes artistic aptitude using three elements.",
+        bigfiveTitle: "MBTI",
+        bigfiveDesc: "MBTI is a personality test that classifies people's personality types into 16 categories."
+      }
+    };
+
+    $(document).ready(function() {
+      i18next.init({
+        lng: 'ko',
+        resources: {
+          ko: { translation: translations.ko },
+          en: { translation: translations.en }
+        }
+      }, function(err, t) {
+        updateContent();
+
+        $('#language-switch').click(function() {
+          lang = (lang === "ko") ? "en" : "ko";
+          i18next.changeLanguage(lang, updateContent);
+        });
+      });
+    });
+
+    function updateContent() {
+      $('#title').text(i18next.t('title'));
+      $('#mbti-title').text(i18next.t('mbtiTitle'));
+      $('#mbti-desc').text(i18next.t('mbtiDesc'));
+      $('#enneagram-title').text(i18next.t('enneagramTitle'));
+      $('#enneagram-desc').text(i18next.t('enneagramDesc'));
+      $('#bigfive-title').text(i18next.t('bigfiveTitle'));
+      $('#bigfive-desc').text(i18next.t('bigfiveDesc'));
+    }
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
